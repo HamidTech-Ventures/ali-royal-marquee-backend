@@ -1,0 +1,15 @@
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Domain\bin\Debug\net10.0\AliRoyalMarquee.Domain.deps.json
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Domain\bin\Debug\net10.0\AliRoyalMarquee.Domain.dll
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Domain\bin\Debug\net10.0\AliRoyalMarquee.Domain.pdb
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Domain\bin\Debug\net10.0\AliRoyalMarquee.Shared.dll
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Domain\bin\Debug\net10.0\AliRoyalMarquee.Shared.pdb
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Domain\obj\Debug\net10.0\AliRoyalMarquee.Domain.csproj.AssemblyReference.cache
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Domain\obj\Debug\net10.0\AliRoyalMarquee.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Domain\obj\Debug\net10.0\AliRoyalMarquee.Domain.AssemblyInfoInputs.cache
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Domain\obj\Debug\net10.0\AliRoyalMarquee.Domain.AssemblyInfo.cs
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Domain\obj\Debug\net10.0\AliRoyalMarquee.Domain.csproj.CoreCompileInputs.cache
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Domain\obj\Debug\net10.0\AliRoyal.D96C2AE4.Up2Date
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Domain\obj\Debug\net10.0\AliRoyalMarquee.Domain.dll
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Domain\obj\Debug\net10.0\refint\AliRoyalMarquee.Domain.dll
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Domain\obj\Debug\net10.0\AliRoyalMarquee.Domain.pdb
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Domain\obj\Debug\net10.0\ref\AliRoyalMarquee.Domain.dll

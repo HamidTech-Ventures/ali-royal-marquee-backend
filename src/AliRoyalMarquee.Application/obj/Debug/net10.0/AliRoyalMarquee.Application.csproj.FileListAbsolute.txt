@@ -1,0 +1,17 @@
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Application\bin\Debug\net10.0\AliRoyalMarquee.Application.deps.json
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Application\bin\Debug\net10.0\AliRoyalMarquee.Application.dll
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Application\bin\Debug\net10.0\AliRoyalMarquee.Application.pdb
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Application\bin\Debug\net10.0\AliRoyalMarquee.Domain.dll
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Application\bin\Debug\net10.0\AliRoyalMarquee.Shared.dll
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Application\bin\Debug\net10.0\AliRoyalMarquee.Domain.pdb
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Application\bin\Debug\net10.0\AliRoyalMarquee.Shared.pdb
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Application\obj\Debug\net10.0\AliRoyalMarquee.Application.csproj.AssemblyReference.cache
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Application\obj\Debug\net10.0\AliRoyalMarquee.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Application\obj\Debug\net10.0\AliRoyalMarquee.Application.AssemblyInfoInputs.cache
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Application\obj\Debug\net10.0\AliRoyalMarquee.Application.AssemblyInfo.cs
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Application\obj\Debug\net10.0\AliRoyalMarquee.Application.csproj.CoreCompileInputs.cache
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Application\obj\Debug\net10.0\AliRoyal.91BB9723.Up2Date
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Application\obj\Debug\net10.0\AliRoyalMarquee.Application.dll
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Application\obj\Debug\net10.0\refint\AliRoyalMarquee.Application.dll
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Application\obj\Debug\net10.0\AliRoyalMarquee.Application.pdb
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Application\obj\Debug\net10.0\ref\AliRoyalMarquee.Application.dll

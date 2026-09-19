@@ -1,0 +1,15 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/AliRoyalMarquee.API/AliRoyalMarquee.API.csproj" />
+    <Project Path="src/AliRoyalMarquee.Application/AliRoyalMarquee.Application.csproj" />
+    <Project Path="src/AliRoyalMarquee.Domain/AliRoyalMarquee.Domain.csproj" />
+    <Project Path="src/AliRoyalMarquee.Infrastructure/AliRoyalMarquee.Infrastructure.csproj" />
+    <Project Path="src/AliRoyalMarquee.Shared/AliRoyalMarquee.Shared.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/AliRoyalMarquee.API.Tests/AliRoyalMarquee.API.Tests.csproj" />
+    <Project Path="tests/AliRoyalMarquee.Application.Tests/AliRoyalMarquee.Application.Tests.csproj" />
+    <Project Path="tests/AliRoyalMarquee.Domain.Tests/AliRoyalMarquee.Domain.Tests.csproj" />
+    <Project Path="tests/AliRoyalMarquee.Infrastructure.Tests/AliRoyalMarquee.Infrastructure.Tests.csproj" />
+  </Folder>
+</Solution>

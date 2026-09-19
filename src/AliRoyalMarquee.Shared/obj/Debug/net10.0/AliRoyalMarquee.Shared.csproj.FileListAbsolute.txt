@@ -1,0 +1,11 @@
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Shared\bin\Debug\net10.0\AliRoyalMarquee.Shared.deps.json
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Shared\bin\Debug\net10.0\AliRoyalMarquee.Shared.dll
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Shared\bin\Debug\net10.0\AliRoyalMarquee.Shared.pdb
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Shared\obj\Debug\net10.0\AliRoyalMarquee.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Shared\obj\Debug\net10.0\AliRoyalMarquee.Shared.AssemblyInfoInputs.cache
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Shared\obj\Debug\net10.0\AliRoyalMarquee.Shared.AssemblyInfo.cs
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Shared\obj\Debug\net10.0\AliRoyalMarquee.Shared.csproj.CoreCompileInputs.cache
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Shared\obj\Debug\net10.0\AliRoyalMarquee.Shared.dll
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Shared\obj\Debug\net10.0\refint\AliRoyalMarquee.Shared.dll
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Shared\obj\Debug\net10.0\AliRoyalMarquee.Shared.pdb
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Shared\obj\Debug\net10.0\ref\AliRoyalMarquee.Shared.dll
