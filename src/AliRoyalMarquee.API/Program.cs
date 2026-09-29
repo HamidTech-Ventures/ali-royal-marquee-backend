@@ -39,8 +39,21 @@ builder.Services.AddEndpointsApiExplorer();
 // Configure Swagger - Removed due to .NET 10 compatibility issues with Swashbuckle 6.6.2
 
 // Infrastructure - Database
+var envDbString = builder.Configuration["DB_CONNECTION_STRING"] ?? builder.Configuration["DATABASE_URL"];
+var connectionString = !string.IsNullOrEmpty(envDbString) 
+    ? envDbString 
+    : builder.Configuration.GetConnectionString("DefaultConnection");
+    
+if (string.IsNullOrEmpty(connectionString) || connectionString.Contains("localhost:5434"))
+{
+    if (builder.Environment.IsProduction()) 
+    {
+        throw new InvalidOperationException("No production database connection string found! Please set DB_CONNECTION_STRING in Railway.");
+    }
+}
+
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(connectionString));
 builder.Services.AddScoped<IAppDbContext>(provider => provider.GetRequiredService<AppDbContext>());
 builder.Services.AddScoped<AliRoyalMarquee.Application.Common.Interfaces.ITokenService, AliRoyalMarquee.Infrastructure.Services.TokenService>();
 builder.Services.AddScoped<AliRoyalMarquee.Application.Enquiries.Interfaces.IQuotationPdfGenerator, AliRoyalMarquee.Infrastructure.Pdf.QuotationPdfGenerator>();
