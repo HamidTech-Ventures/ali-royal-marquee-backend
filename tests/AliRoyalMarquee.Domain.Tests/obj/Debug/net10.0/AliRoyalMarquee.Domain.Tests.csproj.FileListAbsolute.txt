@@ -100,3 +100,4 @@ C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\tests
 C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\tests\AliRoyalMarquee.Domain.Tests\obj\Debug\net10.0\AliRoyalMarquee.Domain.Tests.pdb
 C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\tests\AliRoyalMarquee.Domain.Tests\obj\Debug\net10.0\AliRoyalMarquee.Domain.Tests.genruntimeconfig.cache
 C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\tests\AliRoyalMarquee.Domain.Tests\obj\Debug\net10.0\ref\AliRoyalMarquee.Domain.Tests.dll
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\tests\AliRoyalMarquee.Domain.Tests\obj\Debug\net10.0\AliRoyalMarquee.Domain.Tests.sourcelink.json

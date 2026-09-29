@@ -108,3 +108,4 @@ C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\tests
 C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\tests\AliRoyalMarquee.Application.Tests\bin\Debug\net10.0\MediatR.Contracts.dll
 C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\tests\AliRoyalMarquee.Application.Tests\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.dll
 C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\tests\AliRoyalMarquee.Application.Tests\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\tests\AliRoyalMarquee.Application.Tests\obj\Debug\net10.0\AliRoyalMarquee.Application.Tests.sourcelink.json

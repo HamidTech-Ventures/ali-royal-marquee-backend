@@ -10,7 +10,12 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=aliroyal;Username=postgres;Password=postgres
-      - Redis__Configuration=redis:6379
+      - ConnectionStrings__Redis=redis:6379
+      - AdminPassword=SuperSecretAdminPassword123!
+      - Jwt__Key=SuperSecureRandomGeneratedKey2026!
+      - Jwt__Issuer=AliRoyalMarquee
+      - Jwt__Audience=AliRoyalMarqueeUsers
+      - CORS_ALLOWED_ORIGINS=http://localhost:3000,http://localhost:5173,http://frontend
     depends_on:
       - postgres
       - redis

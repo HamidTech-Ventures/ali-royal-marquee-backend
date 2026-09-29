@@ -15,3 +15,4 @@ C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\A
 C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Application\obj\Debug\net10.0\refint\AliRoyalMarquee.Application.dll
 C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Application\obj\Debug\net10.0\AliRoyalMarquee.Application.pdb
 C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Application\obj\Debug\net10.0\ref\AliRoyalMarquee.Application.dll
+C:\My working\HamidTech_Ventures\Clients\marquee-management-system\backend\src\AliRoyalMarquee.Application\obj\Debug\net10.0\AliRoyalMarquee.Application.sourcelink.json

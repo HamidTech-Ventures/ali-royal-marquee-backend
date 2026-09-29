@@ -28,6 +28,8 @@ public class AppDbContext : DbContext, IAppDbContext
     public DbSet<PricingRule> PricingRules => Set<PricingRule>();
     public DbSet<InventoryItem> InventoryItems => Set<InventoryItem>();
     public DbSet<Vendor> Vendors => Set<Vendor>();
+    public DbSet<SystemSetting> SystemSettings => Set<SystemSetting>();
+    public DbSet<Notification> Notifications => Set<Notification>();
     public DbSet<StaffMember> StaffMembers => Set<StaffMember>();
     
     public DbSet<User> Users => Set<User>();

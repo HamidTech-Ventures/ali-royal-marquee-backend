@@ -27,6 +27,7 @@ public static class AppDbSeeder
 
             await SeedRolesAndPermissionsAsync(context);
             await SeedAdminUserAsync(context, configuration, passwordHasher);
+            await SeedSystemSettingsAsync(context);
         }
         catch (Exception ex)
         {
@@ -106,6 +107,26 @@ public static class AppDbSeeder
             adminUser.PasswordHash = passwordHasher.HashPassword(adminUser, adminPassword);
 
             context.Users.Add(adminUser);
+            await context.SaveChangesAsync();
+        }
+    }
+
+    private static async Task SeedSystemSettingsAsync(AppDbContext context)
+    {
+        if (!await context.SystemSettings.AnyAsync())
+        {
+            var defaultSettings = new List<SystemSetting>
+            {
+                new() { Key = "BusinessName", Value = "Ali Royal Marquee (Private) Limited", Category = "BusinessProfile" },
+                new() { Key = "BrandName", Value = "Ali Royal Marquee • Grand Ballroom & Lawns", Category = "BusinessProfile" },
+                new() { Key = "PrimaryPhone", Value = "+92 300 1234567", Category = "BusinessProfile" },
+                new() { Key = "WhatsApp", Value = "+92 321 7890123", Category = "BusinessProfile" },
+                new() { Key = "Address", Value = "Plot 14-B, Main Islamabad Expressway, Islamabad, Pakistan", Category = "BusinessProfile" },
+                new() { Key = "TaxRate", Value = "16", Category = "Regional" },
+                new() { Key = "Currency", Value = "PKR", Category = "Regional" }
+            };
+
+            context.SystemSettings.AddRange(defaultSettings);
             await context.SaveChangesAsync();
         }
     }

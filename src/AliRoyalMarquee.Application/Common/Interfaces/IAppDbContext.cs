@@ -24,6 +24,8 @@ public interface IAppDbContext
     DbSet<PricingRule> PricingRules { get; }
     DbSet<InventoryItem> InventoryItems { get; }
     DbSet<Vendor> Vendors { get; }
+    DbSet<SystemSetting> SystemSettings { get; }
+    DbSet<Notification> Notifications { get; }
     DbSet<StaffMember> StaffMembers { get; }
 
     DbSet<User> Users { get; }

@@ -93,6 +93,8 @@ builder.Services.AddApplication();
 builder.Services.AddProblemDetails();
 builder.Services.AddExceptionHandler<AliRoyalMarquee.API.ExceptionHandlers.GlobalExceptionHandler>();
 
+builder.Services.AddSignalR();
+
 // Add Redis
 builder.Services.AddStackExchangeRedisCache(options =>
 {
@@ -131,6 +133,7 @@ app.UseCors("AllowFrontend");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
+app.MapHub<AliRoyalMarquee.API.Hubs.NotificationHub>("/hubs/notifications");
 
 app.UseHangfireDashboard("/hangfire", new DashboardOptions
 {
