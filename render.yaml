@@ -1,0 +1,34 @@
+services:
+  - type: web
+    name: marquee-api
+    env: docker
+    region: singapore # Change to match your Supabase region if possible
+    plan: free
+    dockerContext: .
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: ConnectionStrings__DefaultConnection
+        sync: false # Set this securely in the Render Dashboard (Supabase string)
+      - key: ConnectionStrings__Redis
+        fromService:
+          type: redis
+          name: marquee-redis
+          property: connectionString
+      - key: AdminPassword
+        sync: false # Set this securely in the Render Dashboard
+      - key: Jwt__Key
+        generateValue: true
+      - key: Jwt__Issuer
+        value: AliRoyalMarquee
+      - key: Jwt__Audience
+        value: AliRoyalMarqueeUsers
+      - key: CORS_ALLOWED_ORIGINS
+        sync: false # Set this to your Vercel URL, e.g., https://your-frontend.vercel.app
+
+  - type: redis
+    name: marquee-redis
+    region: singapore # Change to match your Supabase region if possible
+    plan: free
+    ipAllowList: [] # Only allow internal connections
