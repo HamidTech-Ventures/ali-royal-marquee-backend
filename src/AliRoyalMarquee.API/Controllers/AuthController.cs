@@ -89,7 +89,7 @@ public class AuthController : ControllerBase
         Response.Cookies.Delete("refreshToken", new CookieOptions
         {
             HttpOnly = true,
-            SameSite = SameSiteMode.Strict,
+            SameSite = SameSiteMode.None,
             Secure = true // True for production proxy
         });
 
@@ -141,7 +141,7 @@ public class AuthController : ControllerBase
         {
             HttpOnly = true,
             Expires = expiresAt,
-            SameSite = SameSiteMode.Strict,
+            SameSite = SameSiteMode.None,
             Secure = true // We require HTTPS/Proxy for this
         };
         Response.Cookies.Append("refreshToken", token, cookieOptions);

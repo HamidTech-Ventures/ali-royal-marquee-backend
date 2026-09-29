@@ -46,10 +46,7 @@ var connectionString = !string.IsNullOrEmpty(envDbString)
     
 if (string.IsNullOrEmpty(connectionString) || connectionString.Contains("localhost:5434"))
 {
-    if (builder.Environment.IsProduction()) 
-    {
-        throw new InvalidOperationException("No production database connection string found! Please set DB_CONNECTION_STRING in Railway.");
-    }
+    throw new InvalidOperationException("CRITICAL ERROR: No database connection string found! Railway is NOT passing the DB_CONNECTION_STRING environment variable to your code. Please check your Railway variables tab.");
 }
 
 builder.Services.AddDbContext<AppDbContext>(options =>
