@@ -23,6 +23,8 @@ public interface IAppDbContext
     DbSet<Addon> Addons { get; }
     DbSet<PricingRule> PricingRules { get; }
     DbSet<InventoryItem> InventoryItems { get; }
+        DbSet<InventoryMovement> InventoryMovements { get; }
+        DbSet<InventoryReservation> InventoryReservations { get; }
     DbSet<Vendor> Vendors { get; }
     DbSet<SystemSetting> SystemSettings { get; }
     DbSet<Notification> Notifications { get; }

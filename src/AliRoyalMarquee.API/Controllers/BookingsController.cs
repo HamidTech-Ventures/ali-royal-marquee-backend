@@ -69,4 +69,11 @@ public class BookingsController : ControllerBase
         var isAvailable = await _mediator.Send(query);
         return Ok(new { available = isAvailable });
     }
+
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> DeleteBooking(Guid id)
+    {
+        await _mediator.Send(new AliRoyalMarquee.Application.Bookings.Commands.DeleteBooking.DeleteBookingCommand(id));
+        return NoContent();
+    }
 }

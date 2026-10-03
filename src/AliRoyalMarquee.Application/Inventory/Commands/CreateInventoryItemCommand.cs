@@ -14,6 +14,7 @@ namespace AliRoyalMarquee.Application.Inventory.Commands
         public decimal Quantity { get; set; }
         public decimal MinQuantity { get; set; }
         public string Unit { get; set; }
+        public string ItemType { get; set; }
     }
 
     public class CreateInventoryItemCommandHandler : IRequestHandler<CreateInventoryItemCommand, Guid>
@@ -33,7 +34,8 @@ namespace AliRoyalMarquee.Application.Inventory.Commands
                 Category = request.Category,
                 Quantity = request.Quantity,
                 MinQuantity = request.MinQuantity,
-                Unit = request.Unit
+                Unit = request.Unit,
+                ItemType = request.ItemType
             };
 
             _context.InventoryItems.Add(entity);

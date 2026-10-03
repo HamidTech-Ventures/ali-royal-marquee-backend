@@ -15,6 +15,8 @@ namespace AliRoyalMarquee.Application.StaffMembers.Commands
         public string Shift { get; set; }
         public string Status { get; set; }
         public decimal? Salary { get; set; }
+        public string CNIC { get; set; }
+        public string CompensationType { get; set; }
     }
 
     public class CreateStaffCommandHandler : IRequestHandler<CreateStaffCommand, Guid>
@@ -35,7 +37,9 @@ namespace AliRoyalMarquee.Application.StaffMembers.Commands
                 Phone = request.Phone,
                 Shift = request.Shift,
                 Status = request.Status,
-                Salary = request.Salary
+                Salary = request.Salary,
+                CNIC = request.CNIC,
+                CompensationType = request.CompensationType
             };
 
             _context.StaffMembers.Add(entity);

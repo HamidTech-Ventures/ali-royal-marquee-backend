@@ -11,5 +11,8 @@ namespace AliRoyalMarquee.Application.StaffMembers.DTOs
         public string Shift { get; set; }
         public string Status { get; set; }
         public decimal? Salary { get; set; }
+        public string CNIC { get; set; }
+        public string CompensationType { get; set; }
+        public DateTimeOffset CreatedAt { get; set; }
     }
 }

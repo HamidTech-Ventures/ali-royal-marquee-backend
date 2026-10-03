@@ -13,7 +13,6 @@ public record EnquiryStatsDto(
     int TotalEnquiries,
     int NewThisWeek,
     int FollowUpsDue,
-    int HotLeads,
     double ConversionRate,
     decimal EstimatedPipelineValue
 );
@@ -43,13 +42,11 @@ public class GetEnquiryStatsQueryHandler : IRequestHandler<GetEnquiryStatsQuery,
         
         var newThisWeek = allEnquiries.Count(e => e.CreatedAt >= startOfWeek);
         
-        var hotLeads = allEnquiries.Count(e => e.Priority == EnquiryPriority.Hot && e.Status != EnquiryStatus.Converted && e.Status != EnquiryStatus.Lost);
-
-        var converted = allEnquiries.Count(e => e.Status == EnquiryStatus.Converted);
-        var lost = allEnquiries.Count(e => e.Status == EnquiryStatus.Lost);
+        var converted = allEnquiries.Count(e => e.Status == EnquiryStatus.AdvancePaid);
+        var lost = allEnquiries.Count(e => e.Status == EnquiryStatus.Cancelled);
         var conversionRate = (converted + lost) > 0 ? Math.Round((double)converted / (converted + lost) * 100, 2) : 0;
 
-        var activeEnquiries = allEnquiries.Where(e => e.Status != EnquiryStatus.Converted && e.Status != EnquiryStatus.Lost).ToList();
+        var activeEnquiries = allEnquiries.Where(e => e.Status != EnquiryStatus.AdvancePaid && e.Status != EnquiryStatus.Cancelled).ToList();
         var estimatedPipelineValue = activeEnquiries.Sum(e => 
         {
             var activeQuotation = e.Quotations
@@ -71,7 +68,6 @@ public class GetEnquiryStatsQueryHandler : IRequestHandler<GetEnquiryStatsQuery,
             totalEnquiries,
             newThisWeek,
             pendingFollowUps,
-            hotLeads,
             conversionRate,
             estimatedPipelineValue
         );

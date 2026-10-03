@@ -45,6 +45,9 @@ public class AddPaymentCommandHandler : IRequestHandler<AddPaymentCommand, Guid>
 
         // We can just add to the Payments DbSet if it exists, or via booking.AddPayment
         booking.AddPayment(payment);
+        if (booking.Status == BookingStatus.Pending) {
+            booking.Confirm();
+        }
         
         await _context.SaveChangesAsync(cancellationToken);
         

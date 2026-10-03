@@ -15,7 +15,9 @@ public class EnquiryDto
     public DateOnly PreferredDate { get; set; }
     public int GuestCount { get; set; }
     public EnquirySource Source { get; set; }
-    public EnquiryPriority Priority { get; set; }
+    public EventShift Shift { get; set; }
+    public int BufferCapacity { get; set; }
+    public bool PartitionRequired { get; set; }
     public EnquiryStatus Status { get; set; }
     public string? AssignedToName { get; set; }
     public decimal? EstimatedValue { get; set; }

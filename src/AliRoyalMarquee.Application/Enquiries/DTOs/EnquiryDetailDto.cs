@@ -7,8 +7,7 @@ namespace AliRoyalMarquee.Application.Enquiries.DTOs;
 public class EnquiryDetailDto : EnquiryDto
 {
     public DateOnly? AlternativeDate { get; set; }
-    public TimeOnly? PreferredStartTime { get; set; }
-    public TimeOnly? PreferredEndTime { get; set; }
+
     public Guid? PreferredVenueId { get; set; }
     public string? PreferredVenueName { get; set; }
     public decimal? Budget { get; set; }

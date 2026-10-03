@@ -45,6 +45,35 @@ namespace AliRoyalMarquee.API.Controllers
             return NoContent();
         }
 
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<InventoryItemDto>> GetInventoryItemById(Guid id)
+        {
+            var item = await _mediator.Send(new GetInventoryItemByIdQuery { Id = id });
+            if (item == null) return NotFound();
+            return item;
+        }
+
+        [HttpPost("reservations")]
+        public async Task<ActionResult<Guid>> AddReservation(AddInventoryReservationCommand command)
+        {
+            return await _mediator.Send(command);
+        }
+
+        [HttpPost("movements")]
+        public async Task<ActionResult<Guid>> AddMovement(AddInventoryMovementCommand command)
+        {
+            return await _mediator.Send(command);
+        }
+
+        [HttpPut("{id}/details")]
+        public async Task<ActionResult> UpdateDetails(Guid id, UpdateInventoryItemDetailsCommand command)
+        {
+            if (id != command.Id) return BadRequest();
+            await _mediator.Send(command);
+            return NoContent();
+        }
+
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteInventoryItem(Guid id)
         {

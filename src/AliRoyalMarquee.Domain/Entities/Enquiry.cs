@@ -16,16 +16,16 @@ public class Enquiry : BaseEntity
     
     public DateOnly PreferredDate { get; private set; }
     public DateOnly? AlternativeDate { get; private set; }
-    public TimeOnly? PreferredStartTime { get; private set; }
-    public TimeOnly? PreferredEndTime { get; private set; }
+    public EventShift Shift { get; private set; }
     public int GuestCount { get; private set; }
+    public int BufferCapacity { get; private set; }
+    public bool PartitionRequired { get; private set; }
     
     public Guid? PreferredVenueId { get; private set; }
     public Venue? PreferredVenue { get; private set; }
     
     public decimal? Budget { get; private set; }
     public EnquirySource Source { get; private set; }
-    public EnquiryPriority Priority { get; private set; }
     public Guid? AssignedToId { get; private set; }
     public User? AssignedTo { get; private set; }
     
@@ -52,8 +52,7 @@ public class Enquiry : BaseEntity
         string? eventType, 
         DateOnly preferredDate, 
         int guestCount,
-        EnquirySource source,
-        EnquiryPriority priority)
+        EnquirySource source)
     {
         CustomerId = customerId;
         ReferenceNumber = referenceNumber;
@@ -62,8 +61,7 @@ public class Enquiry : BaseEntity
         PreferredDate = preferredDate;
         GuestCount = guestCount;
         Source = source;
-        Priority = priority;
-        Status = EnquiryStatus.New;
+        Status = EnquiryStatus.Inquiry;
     }
 
     public void UpdateDetails(
@@ -71,13 +69,13 @@ public class Enquiry : BaseEntity
         string? eventType, 
         DateOnly preferredDate, 
         DateOnly? alternativeDate,
-        TimeOnly? preferredStartTime,
-        TimeOnly? preferredEndTime,
+        EventShift shift,
         int guestCount,
+        int bufferCapacity,
+        bool partitionRequired,
         Guid? preferredVenueId,
         decimal? budget,
         EnquirySource source,
-        EnquiryPriority priority,
         Guid? assignedToId,
         string? notes,
         decimal? estimatedValue)
@@ -86,13 +84,13 @@ public class Enquiry : BaseEntity
         EventType = eventType;
         PreferredDate = preferredDate;
         AlternativeDate = alternativeDate;
-        PreferredStartTime = preferredStartTime;
-        PreferredEndTime = preferredEndTime;
+        Shift = shift;
         GuestCount = guestCount;
+        BufferCapacity = bufferCapacity;
+        PartitionRequired = partitionRequired;
         PreferredVenueId = preferredVenueId;
         Budget = budget;
         Source = source;
-        Priority = priority;
         AssignedToId = assignedToId;
         Notes = notes;
         EstimatedValue = estimatedValue;
@@ -101,7 +99,7 @@ public class Enquiry : BaseEntity
     public void UpdateStatus(EnquiryStatus newStatus)
     {
         Status = newStatus;
-        if (newStatus != EnquiryStatus.Lost)
+        if (newStatus != EnquiryStatus.Cancelled)
         {
             LostReason = null;
         }
@@ -112,15 +110,15 @@ public class Enquiry : BaseEntity
         if (string.IsNullOrWhiteSpace(reason))
             throw new ArgumentException("Reason is required when marking enquiry as lost.");
         
-        Status = EnquiryStatus.Lost;
+        Status = EnquiryStatus.Cancelled;
         LostReason = reason;
     }
 
     public void ConvertToBooking()
     {
-        if (Status == EnquiryStatus.Converted)
+        if (Status == EnquiryStatus.AdvancePaid)
             throw new InvalidOperationException("Enquiry is already converted.");
             
-        Status = EnquiryStatus.Converted;
+        Status = EnquiryStatus.AdvancePaid;
     }
 }

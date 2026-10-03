@@ -47,10 +47,10 @@ public class CreateQuotationRevisionCommandHandler : IRequestHandler<CreateQuota
 
         foreach (var li in originalQuotation.LineItems)
         {
-            newQuotation.AddLineItem(li.Category, li.Description, li.Quantity, li.Unit, li.UnitPrice, li.SortOrder);
+            newQuotation.AddLineItem(li.ItemType, li.Category, li.Description, li.Quantity, li.Unit, li.UnitPrice, li.SortOrder, li.PackageId, li.AddonId);
         }
 
-        newQuotation.SetChargesAndDiscounts(originalQuotation.DiscountAmount, originalQuotation.ServiceChargeAmount, originalQuotation.TaxAmount);
+        newQuotation.SetChargesAndDiscounts(originalQuotation.DiscountAmount, originalQuotation.ServiceChargeAmount, originalQuotation.PRATaxAmount, originalQuotation.TokenMoney, originalQuotation.AdvancePayment);
 
         _context.EnquiryQuotations.Add(newQuotation);
         

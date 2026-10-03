@@ -10,7 +10,7 @@ namespace AliRoyalMarquee.Domain.Entities
         public decimal Price { get; set; }
         public string Status { get; set; } = "Active";
         public int MinGuests { get; set; }
-        public int? ProfitMarginTarget { get; set; }
+        
         public string? InternalNotes { get; set; }
         public string? InclusionsJson { get; set; }
     }

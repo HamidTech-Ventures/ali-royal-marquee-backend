@@ -54,7 +54,6 @@ public class EnquiriesReportPdfGenerator : IEnquiriesReportPdfGenerator
             column.Item().Row(row =>
             {
                 row.RelativeItem().Text($"Total: {stats.TotalEnquiries}").SemiBold();
-                row.RelativeItem().Text($"Hot Leads: {stats.HotLeads}").SemiBold();
                 row.RelativeItem().Text($"Conv. Rate: {stats.ConversionRate}%").SemiBold();
                 row.RelativeItem().Text($"Pipeline: {stats.EstimatedPipelineValue:C}").SemiBold();
             });
@@ -77,7 +76,7 @@ public class EnquiriesReportPdfGenerator : IEnquiriesReportPdfGenerator
                 columns.RelativeColumn(2);  // Event
                 columns.RelativeColumn();   // Date
                 columns.RelativeColumn();   // Status
-                columns.RelativeColumn();   // Priority
+                columns.RelativeColumn();   // Shift
             });
 
             table.Header(header =>
@@ -87,7 +86,7 @@ public class EnquiriesReportPdfGenerator : IEnquiriesReportPdfGenerator
                 header.Cell().Text("Event").SemiBold();
                 header.Cell().Text("Date").SemiBold();
                 header.Cell().Text("Status").SemiBold();
-                header.Cell().Text("Priority").SemiBold();
+                header.Cell().Text("Shift").SemiBold();
 
                 header.Cell().ColumnSpan(6).PaddingVertical(5).LineHorizontal(1).LineColor(Colors.Black);
             });
@@ -99,7 +98,7 @@ public class EnquiriesReportPdfGenerator : IEnquiriesReportPdfGenerator
                 table.Cell().Text(enq.EventName);
                 table.Cell().Text(enq.PreferredDate.ToString("dd MMM yyyy"));
                 table.Cell().Text(enq.Status.ToString());
-                table.Cell().Text(enq.Priority.ToString());
+                table.Cell().Text(enq.Shift.ToString());
             }
         });
     }

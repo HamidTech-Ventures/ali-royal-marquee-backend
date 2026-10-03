@@ -33,7 +33,10 @@ namespace AliRoyalMarquee.Application.StaffMembers.Queries
                     Phone = s.Phone,
                     Shift = s.Shift,
                     Status = s.Status,
-                    Salary = s.Salary
+                    Salary = s.Salary,
+                    CNIC = s.CNIC,
+                    CompensationType = s.CompensationType,
+                    CreatedAt = s.CreatedAt
                 })
                 .ToListAsync(cancellationToken);
         }

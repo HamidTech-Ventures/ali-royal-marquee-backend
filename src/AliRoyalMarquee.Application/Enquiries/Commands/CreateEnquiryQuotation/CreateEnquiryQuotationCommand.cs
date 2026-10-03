@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 namespace AliRoyalMarquee.Application.Enquiries.Commands.CreateEnquiryQuotation;
 
 public record CreateQuotationLineItemDto(
+    QuotationItemType ItemType,
     string Category,
     string Description,
     decimal Quantity,
@@ -23,7 +24,9 @@ public record CreateEnquiryQuotationCommand(
     List<CreateQuotationLineItemDto> LineItems,
     decimal DiscountAmount,
     decimal ServiceChargeAmount,
-    decimal TaxAmount,
+    decimal PRATaxAmount,
+    decimal TokenMoney,
+    decimal AdvancePayment,
     DateTime? ValidUntil,
     string? Notes,
     Guid CreatorId) : IRequest<Guid>;
@@ -61,10 +64,10 @@ public class CreateEnquiryQuotationCommandHandler : IRequestHandler<CreateEnquir
 
         foreach (var li in request.LineItems)
         {
-            quotation.AddLineItem(li.Category, li.Description, li.Quantity, li.Unit, li.UnitPrice, li.SortOrder);
+            quotation.AddLineItem(li.ItemType, li.Category, li.Description, li.Quantity, li.Unit, li.UnitPrice, li.SortOrder);
         }
 
-        quotation.SetChargesAndDiscounts(request.DiscountAmount, request.ServiceChargeAmount, request.TaxAmount);
+        quotation.SetChargesAndDiscounts(request.DiscountAmount, request.ServiceChargeAmount, request.PRATaxAmount, request.TokenMoney, request.AdvancePayment);
 
         _context.EnquiryQuotations.Add(quotation);
         

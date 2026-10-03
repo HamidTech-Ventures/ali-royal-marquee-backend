@@ -42,7 +42,7 @@ public class ConvertEnquiryToBookingCommandHandler : IRequestHandler<ConvertEnqu
 
             if (enquiry == null) throw new Exception("Enquiry not found");
             
-            if (enquiry.Status == EnquiryStatus.Converted)
+            if (enquiry.Status == EnquiryStatus.AdvancePaid)
                 throw new Exception("Enquiry is already converted to a booking.");
 
             // 2. Check venue availability

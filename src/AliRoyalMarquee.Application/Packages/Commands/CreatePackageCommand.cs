@@ -13,7 +13,7 @@ namespace AliRoyalMarquee.Application.Packages.Commands
         public string Type { get; set; } = string.Empty;
         public decimal Price { get; set; }
         public int MinGuests { get; set; }
-        public int? ProfitMarginTarget { get; set; }
+        
         public string? InternalNotes { get; set; }
         public string? InclusionsJson { get; set; }
     }
@@ -35,7 +35,7 @@ namespace AliRoyalMarquee.Application.Packages.Commands
                 Type = request.Type,
                 Price = request.Price,
                 MinGuests = request.MinGuests,
-                ProfitMarginTarget = request.ProfitMarginTarget,
+                
                 InternalNotes = request.InternalNotes,
                 InclusionsJson = request.InclusionsJson,
                 Status = "Active",

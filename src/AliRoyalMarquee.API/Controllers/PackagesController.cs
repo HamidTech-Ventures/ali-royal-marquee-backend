@@ -84,6 +84,14 @@ namespace AliRoyalMarquee.API.Controllers
             return Ok(itemId);
         }
 
+        [HttpPut("menu-items/{id}")]
+        public async Task<ActionResult> UpdateMenuItem(Guid id, [FromBody] UpdateMenuItemCommand command)
+        {
+            if (id != command.Id) return BadRequest();
+            await _mediator.Send(command);
+            return NoContent();
+        }
+
         [HttpDelete("menu-items/{id}")]
         public async Task<ActionResult> DeleteMenuItem(Guid id)
         {
@@ -108,6 +116,14 @@ namespace AliRoyalMarquee.API.Controllers
             return Ok(itemId);
         }
 
+        [HttpPut("addons/{id}")]
+        public async Task<ActionResult> UpdateAddon(Guid id, [FromBody] UpdateAddonCommand command)
+        {
+            if (id != command.Id) return BadRequest();
+            await _mediator.Send(command);
+            return NoContent();
+        }
+
         [HttpDelete("addons/{id}")]
         public async Task<ActionResult> DeleteAddon(Guid id)
         {
@@ -130,6 +146,14 @@ namespace AliRoyalMarquee.API.Controllers
         {
             var itemId = await _mediator.Send(command);
             return Ok(itemId);
+        }
+
+        [HttpPut("pricing-rules/{id}")]
+        public async Task<ActionResult> UpdatePricingRule(Guid id, [FromBody] UpdatePricingRuleCommand command)
+        {
+            if (id != command.Id) return BadRequest();
+            await _mediator.Send(command);
+            return NoContent();
         }
 
         [HttpDelete("pricing-rules/{id}")]

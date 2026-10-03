@@ -12,7 +12,7 @@ public record UpdatePackageCommand : IRequest<bool>
     public decimal Price { get; init; }
     public string Status { get; init; } = "Active";
     public int MinGuests { get; init; }
-    public int? ProfitMarginTarget { get; init; }
+    
     public string? InternalNotes { get; init; }
     public string? InclusionsJson { get; init; }
 }
@@ -38,7 +38,7 @@ public class UpdatePackageCommandHandler : IRequestHandler<UpdatePackageCommand,
         package.Price = request.Price;
         package.Status = request.Status;
         package.MinGuests = request.MinGuests;
-        package.ProfitMarginTarget = request.ProfitMarginTarget;
+        
         package.InternalNotes = request.InternalNotes;
         package.InclusionsJson = request.InclusionsJson;
 

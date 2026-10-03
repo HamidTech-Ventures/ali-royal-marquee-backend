@@ -41,8 +41,8 @@ public class GlobalExceptionHandler : IExceptionHandler
         }
         else if (exception is InvalidOperationException)
         {
-            problemDetails.Title = "Not Found";
-            problemDetails.Status = (int)HttpStatusCode.NotFound;
+            problemDetails.Title = "Bad Request";
+            problemDetails.Status = (int)HttpStatusCode.BadRequest;
             problemDetails.Detail = exception.Message;
         }
         else

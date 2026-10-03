@@ -50,6 +50,12 @@ public class Booking : BaseEntity
         PackageId = packageId;
     }
 
+    
+    public void MarkAsDraft()
+    {
+        Status = BookingStatus.Draft;
+    }
+
     public void Confirm()
     {
         if (Status == BookingStatus.Cancelled)

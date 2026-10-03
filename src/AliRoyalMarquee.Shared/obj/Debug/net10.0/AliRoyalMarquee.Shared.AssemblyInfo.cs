@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AliRoyalMarquee.Shared")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f75bc38de86502ccca1c6181f87390330eb2bf97")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b70e59e86409f697d1925c810b364e00e7d46dcf")]
 [assembly: System.Reflection.AssemblyProductAttribute("AliRoyalMarquee.Shared")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AliRoyalMarquee.Shared")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

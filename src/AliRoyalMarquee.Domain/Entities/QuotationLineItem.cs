@@ -1,5 +1,6 @@
 using System;
 using AliRoyalMarquee.Domain.Common;
+using AliRoyalMarquee.Domain.Enums;
 
 namespace AliRoyalMarquee.Domain.Entities;
 
@@ -9,6 +10,7 @@ public class QuotationLineItem : BaseEntity
     public EnquiryQuotation Quotation { get; private set; } = default!;
 
     public string Category { get; private set; } = default!;
+    public QuotationItemType ItemType { get; private set; }
     public string Description { get; private set; } = default!;
     public decimal Quantity { get; private set; }
     public string Unit { get; private set; } = default!;
@@ -24,9 +26,10 @@ public class QuotationLineItem : BaseEntity
 
     private QuotationLineItem() { } // EF Core
 
-    public QuotationLineItem(Guid quotationId, string category, string description, decimal quantity, string unit, decimal unitPrice, int sortOrder, Guid? packageId = null, Guid? addonId = null)
+    public QuotationLineItem(Guid quotationId, QuotationItemType itemType, string category, string description, decimal quantity, string unit, decimal unitPrice, int sortOrder, Guid? packageId = null, Guid? addonId = null)
     {
         QuotationId = quotationId;
+        ItemType = itemType;
         Category = category;
         Description = description;
         Quantity = quantity;

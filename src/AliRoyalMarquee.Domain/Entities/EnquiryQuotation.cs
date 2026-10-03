@@ -14,12 +14,13 @@ public class EnquiryQuotation : BaseEntity
     public Guid? PreviousQuotationId { get; private set; }
     public EnquiryQuotation? PreviousQuotation { get; private set; }
     
-    // Financials
     public decimal Subtotal { get; private set; }
     public decimal DiscountAmount { get; private set; }
     public decimal ServiceChargeAmount { get; private set; }
-    public decimal TaxAmount { get; private set; }
+    public decimal PRATaxAmount { get; private set; }
     public decimal GrandTotal { get; private set; }
+    public decimal TokenMoney { get; private set; }
+    public decimal AdvancePayment { get; private set; }
 
     public DateTime? ValidUntil { get; private set; }
     public QuotationStatus Status { get; private set; }
@@ -52,24 +53,26 @@ public class EnquiryQuotation : BaseEntity
         Status = QuotationStatus.Draft;
     }
 
-    public void AddLineItem(string category, string description, decimal quantity, string unit, decimal unitPrice, int sortOrder, Guid? packageId = null, Guid? addonId = null)
+    public void AddLineItem(QuotationItemType itemType, string category, string description, decimal quantity, string unit, decimal unitPrice, int sortOrder, Guid? packageId = null, Guid? addonId = null)
     {
-        _lineItems.Add(new QuotationLineItem(Id, category, description, quantity, unit, unitPrice, sortOrder, packageId, addonId));
+        _lineItems.Add(new QuotationLineItem(Id, itemType, category, description, quantity, unit, unitPrice, sortOrder, packageId, addonId));
         RecalculateTotals();
     }
 
-    public void SetChargesAndDiscounts(decimal discountAmount, decimal serviceChargeAmount, decimal taxAmount)
+    public void SetChargesAndDiscounts(decimal discountAmount, decimal serviceChargeAmount, decimal praTaxAmount, decimal tokenMoney, decimal advancePayment)
     {
         DiscountAmount = discountAmount;
         ServiceChargeAmount = serviceChargeAmount;
-        TaxAmount = taxAmount;
+        PRATaxAmount = praTaxAmount;
+        TokenMoney = tokenMoney;
+        AdvancePayment = advancePayment;
         RecalculateTotals();
     }
 
     private void RecalculateTotals()
     {
         Subtotal = _lineItems.Sum(li => li.LineTotal);
-        GrandTotal = Subtotal - DiscountAmount + ServiceChargeAmount + TaxAmount;
+        GrandTotal = Subtotal - DiscountAmount + ServiceChargeAmount + PRATaxAmount;
     }
 
     public void UpdateStatus(QuotationStatus status)

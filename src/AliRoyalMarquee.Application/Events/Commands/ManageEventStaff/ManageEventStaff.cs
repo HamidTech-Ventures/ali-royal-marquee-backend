@@ -23,3 +23,21 @@ public class AddEventStaffCommandHandler : IRequestHandler<AddEventStaffCommand,
         return staff.Id;
     }
 }
+
+public record RemoveEventStaffCommand(Guid EventId, Guid StaffMemberId) : IRequest<bool>;
+
+public class RemoveEventStaffCommandHandler : IRequestHandler<RemoveEventStaffCommand, bool>
+{
+    private readonly IAppDbContext _context;
+    public RemoveEventStaffCommandHandler(IAppDbContext context) => _context = context;
+
+    public async Task<bool> Handle(RemoveEventStaffCommand request, CancellationToken cancellationToken)
+    {
+        var staffList = await _context.EventStaff.Where(s => s.EventId == request.EventId && s.StaffMemberId == request.StaffMemberId).ToListAsync(cancellationToken);
+        if (!staffList.Any()) return false;
+        
+        _context.EventStaff.RemoveRange(staffList);
+        await _context.SaveChangesAsync(cancellationToken);
+        return true;
+    }
+}

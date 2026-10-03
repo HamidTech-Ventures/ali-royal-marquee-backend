@@ -15,14 +15,14 @@ public record CreateEnquiryCommand(
     string? EventType, 
     DateOnly PreferredDate, 
     DateOnly? AlternativeDate,
-    TimeOnly? PreferredStartTime,
-    TimeOnly? PreferredEndTime,
+    EventShift Shift,
     int GuestCount,
+    int BufferCapacity,
+    bool PartitionRequired,
     Guid? PreferredVenueId,
     decimal? Budget,
     string? Notes,
     EnquirySource Source = EnquirySource.WalkIn,
-    EnquiryPriority Priority = EnquiryPriority.Warm,
     Guid? AssignedToId = null) : IRequest<Guid>;
 
 public class CreateEnquiryValidator : AbstractValidator<CreateEnquiryCommand>
@@ -33,9 +33,6 @@ public class CreateEnquiryValidator : AbstractValidator<CreateEnquiryCommand>
             .WithMessage("Either an existing Customer must be selected, or a new Customer Name and Phone must be provided.");
         RuleFor(v => v.EventName).NotEmpty().MaximumLength(100);
         RuleFor(v => v.GuestCount).GreaterThan(0);
-        RuleFor(v => v.PreferredEndTime).GreaterThan(v => v.PreferredStartTime)
-            .When(v => v.PreferredStartTime.HasValue && v.PreferredEndTime.HasValue)
-            .WithMessage("End time must be after start time.");
     }
 }
 
@@ -77,20 +74,20 @@ public class CreateEnquiryCommandHandler : IRequestHandler<CreateEnquiryCommand,
             }
         }
 
-        var enquiry = new Enquiry(customerId, referenceNumber, request.EventName, request.EventType, request.PreferredDate, request.GuestCount, request.Source, request.Priority);
+        var enquiry = new Enquiry(customerId, referenceNumber, request.EventName, request.EventType, request.PreferredDate, request.GuestCount, request.Source);
         
         enquiry.UpdateDetails(
             request.EventName, 
             request.EventType, 
             request.PreferredDate, 
             request.AlternativeDate, 
-            request.PreferredStartTime, 
-            request.PreferredEndTime, 
-            request.GuestCount, 
+            request.Shift, 
+            request.GuestCount,
+            request.BufferCapacity,
+            request.PartitionRequired,
             request.PreferredVenueId, 
             request.Budget, 
             request.Source, 
-            request.Priority, 
             request.AssignedToId, 
             request.Notes, 
             null);

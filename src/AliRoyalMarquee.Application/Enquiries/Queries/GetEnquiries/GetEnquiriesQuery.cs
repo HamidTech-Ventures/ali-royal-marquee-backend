@@ -15,7 +15,7 @@ public record GetEnquiriesQuery : IRequest<GetEnquiriesResponse>
 {
     public string? SearchTerm { get; init; }
     public EnquiryStatus? Status { get; init; }
-    public EnquiryPriority? Priority { get; init; }
+
     public EnquirySource? Source { get; init; }
     public string? EventType { get; init; }
     public Guid? VenueId { get; init; }
@@ -65,9 +65,7 @@ public class GetEnquiriesQueryHandler : IRequestHandler<GetEnquiriesQuery, GetEn
         if (request.Status.HasValue)
             query = query.Where(e => e.Status == request.Status.Value);
             
-        if (request.Priority.HasValue)
-            query = query.Where(e => e.Priority == request.Priority.Value);
-            
+
         if (request.Source.HasValue)
             query = query.Where(e => e.Source == request.Source.Value);
             
@@ -110,7 +108,9 @@ public class GetEnquiriesQueryHandler : IRequestHandler<GetEnquiriesQuery, GetEn
                 PreferredDate = e.PreferredDate,
                 GuestCount = e.GuestCount,
                 Source = e.Source,
-                Priority = e.Priority,
+                Shift = e.Shift,
+                BufferCapacity = e.BufferCapacity,
+                PartitionRequired = e.PartitionRequired,
                 Status = e.Status,
                 AssignedToName = e.AssignedTo != null ? e.AssignedTo.FullName : null,
                 EstimatedValue = e.EstimatedValue,

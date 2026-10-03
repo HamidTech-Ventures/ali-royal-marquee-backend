@@ -7,6 +7,7 @@ using AliRoyalMarquee.Application.Enquiries.Commands.CreateEnquiryQuotation;
 using AliRoyalMarquee.Application.Enquiries.Commands.MarkEnquiryLost;
 using AliRoyalMarquee.Application.Enquiries.Commands.UpdateEnquiry;
 using AliRoyalMarquee.Application.Enquiries.Commands.UpdateEnquiryStatus;
+using AliRoyalMarquee.Application.Enquiries.Commands.DeleteEnquiry;
 using AliRoyalMarquee.Application.Enquiries.Queries.GetEnquiries;
 using AliRoyalMarquee.Application.Enquiries.Queries.GetEnquiryById;
 using AliRoyalMarquee.Domain.Enums;
@@ -33,7 +34,10 @@ public class EnquiriesController : ControllerBase
 
     private Guid GetUserId()
     {
-        var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier) 
+            ?? User.FindFirstValue(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Sub)
+            ?? User.FindFirstValue("id")
+            ?? User.FindFirstValue("userId");
         return Guid.TryParse(userIdString, out var userId) ? userId : Guid.Empty;
     }
 
@@ -78,6 +82,13 @@ public class EnquiriesController : ControllerBase
     {
         if (id != command.Id) return BadRequest();
         await _mediator.Send(command);
+        return NoContent();
+    }
+
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> DeleteEnquiry(Guid id)
+    {
+        await _mediator.Send(new DeleteEnquiryCommand(id));
         return NoContent();
     }
 
@@ -150,7 +161,9 @@ public class EnquiriesController : ControllerBase
             request.LineItems, 
             request.DiscountAmount, 
             request.ServiceChargeAmount, 
-            request.TaxAmount, 
+            request.PRATaxAmount, 
+            request.TokenMoney,
+            request.AdvancePayment,
             request.ValidUntil, 
             request.Notes, 
             GetUserId());
@@ -209,7 +222,7 @@ public class EnquiriesController : ControllerBase
         var stats = await _mediator.Send(new AliRoyalMarquee.Application.Enquiries.Queries.GetEnquiryStats.GetEnquiryStatsQuery());
         var lifecycle = await _mediator.Send(new AliRoyalMarquee.Application.Enquiries.Queries.GetEnquiryLifecycle.GetEnquiryLifecycleQuery("all"));
 
-        var appliedFilters = $"Status: {query.Status?.ToString() ?? "All"}, Priority: {query.Priority?.ToString() ?? "All"}";
+        var appliedFilters = $"Status: {query.Status?.ToString() ?? "All"}";
 
         var pdfBytes = pdfGenerator.GeneratePdf(stats, lifecycle, paginatedEnquiries.Items.ToList(), appliedFilters);
         var filename = $"Ali-Royal-Marquee-Enquiries-Report-{DateTime.UtcNow:yyyy-MM-dd}.pdf";
@@ -255,7 +268,9 @@ public class CreateEnquiryQuotationRequest {
     public System.Collections.Generic.List<AliRoyalMarquee.Application.Enquiries.Commands.CreateEnquiryQuotation.CreateQuotationLineItemDto> LineItems { get; set; } = new();
     public decimal DiscountAmount { get; set; }
     public decimal ServiceChargeAmount { get; set; }
-    public decimal TaxAmount { get; set; }
+    public decimal PRATaxAmount { get; set; }
+    public decimal TokenMoney { get; set; }
+    public decimal AdvancePayment { get; set; }
     public DateTime? ValidUntil { get; set; }
     public string? Notes { get; set; }
 }

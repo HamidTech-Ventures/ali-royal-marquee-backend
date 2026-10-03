@@ -1,3 +1,4 @@
+using AliRoyalMarquee.Application.Events.Commands.CreateEventFromBooking;
 using AliRoyalMarquee.Application.Events.Commands.ManageEventMenu;
 using AliRoyalMarquee.Application.Events.Commands.ManageEventStaff;
 using AliRoyalMarquee.Application.Events.Commands.ManageEventTasks;
@@ -17,6 +18,13 @@ namespace AliRoyalMarquee.API.Controllers;
 [Authorize]
 public class EventsController : ControllerBase
 {
+    [HttpPost("from-booking/{bookingId:guid}")]
+    public async Task<IActionResult> CreateEventFromBooking(Guid bookingId)
+    {
+        var eventId = await _mediator.Send(new CreateEventFromBookingCommand(bookingId));
+        return Ok(new { eventId });
+    }
+
     private readonly IMediator _mediator;
 
     public EventsController(IMediator mediator)
@@ -69,6 +77,13 @@ public class EventsController : ControllerBase
         if (id != command.EventId) return BadRequest();
         var staffId = await _mediator.Send(command);
         return Ok(new { staffId });
+    }
+
+    [HttpDelete("{id:guid}/staff/{staffMemberId:guid}")]
+    public async Task<IActionResult> RemoveStaff(Guid id, Guid staffMemberId)
+    {
+        var result = await _mediator.Send(new RemoveEventStaffCommand(id, staffMemberId));
+        return Ok(new { success = result });
     }
 
     [HttpPost("{id:guid}/menu")]

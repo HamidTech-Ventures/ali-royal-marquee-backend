@@ -247,6 +247,9 @@ namespace AliRoyalMarquee.Infrastructure.Migrations
                     b.Property<decimal?>("Budget")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("BufferCapacity")
+                        .HasColumnType("integer");
+
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -277,25 +280,22 @@ namespace AliRoyalMarquee.Infrastructure.Migrations
                     b.Property<string>("Notes")
                         .HasColumnType("text");
 
+                    b.Property<bool>("PartitionRequired")
+                        .HasColumnType("boolean");
+
                     b.Property<DateOnly>("PreferredDate")
                         .HasColumnType("date");
 
-                    b.Property<TimeOnly?>("PreferredEndTime")
-                        .HasColumnType("time without time zone");
-
-                    b.Property<TimeOnly?>("PreferredStartTime")
-                        .HasColumnType("time without time zone");
-
                     b.Property<Guid?>("PreferredVenueId")
                         .HasColumnType("uuid");
-
-                    b.Property<int>("Priority")
-                        .HasColumnType("integer");
 
                     b.Property<string>("ReferenceNumber")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
+
+                    b.Property<int>("Shift")
+                        .HasColumnType("integer");
 
                     b.Property<int>("Source")
                         .HasColumnType("integer");
@@ -434,6 +434,10 @@ namespace AliRoyalMarquee.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<decimal>("AdvancePayment")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("numeric(18,2)");
+
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -458,6 +462,10 @@ namespace AliRoyalMarquee.Infrastructure.Migrations
                         .HasMaxLength(1000)
                         .HasColumnType("character varying(1000)");
 
+                    b.Property<decimal>("PRATaxAmount")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("numeric(18,2)");
+
                     b.Property<Guid?>("PreviousQuotationId")
                         .HasColumnType("uuid");
 
@@ -477,7 +485,7 @@ namespace AliRoyalMarquee.Infrastructure.Migrations
                         .HasPrecision(18, 2)
                         .HasColumnType("numeric(18,2)");
 
-                    b.Property<decimal>("TaxAmount")
+                    b.Property<decimal>("TokenMoney")
                         .HasPrecision(18, 2)
                         .HasColumnType("numeric(18,2)");
 
@@ -763,6 +771,14 @@ namespace AliRoyalMarquee.Infrastructure.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
 
+                    b.Property<string>("ItemType")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<decimal>("MinQuantity")
                         .HasColumnType("numeric");
 
@@ -777,6 +793,9 @@ namespace AliRoyalMarquee.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<decimal>("UnitPrice")
+                        .HasColumnType("numeric");
+
                     b.Property<DateTimeOffset?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -788,6 +807,95 @@ namespace AliRoyalMarquee.Infrastructure.Migrations
                     b.ToTable("InventoryItems");
                 });
 
+            modelBuilder.Entity("AliRoyalMarquee.Domain.Entities.InventoryMovement", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("InventoryItemId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<decimal>("Quantity")
+                        .HasColumnType("numeric");
+
+                    b.Property<string>("Reference")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTimeOffset?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InventoryItemId");
+
+                    b.ToTable("InventoryMovements");
+                });
+
+            modelBuilder.Entity("AliRoyalMarquee.Domain.Entities.InventoryReservation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("EventId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("InventoryItemId")
+                        .HasColumnType("uuid");
+
+                    b.Property<decimal>("Quantity")
+                        .HasColumnType("numeric");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTimeOffset?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EventId");
+
+                    b.HasIndex("InventoryItemId");
+
+                    b.ToTable("InventoryReservations");
+                });
+
             modelBuilder.Entity("AliRoyalMarquee.Domain.Entities.MenuItem", b =>
                 {
                     b.Property<Guid>("Id")
@@ -797,9 +905,6 @@ namespace AliRoyalMarquee.Infrastructure.Migrations
                     b.Property<string>("Category")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<decimal>("Cost")
-                        .HasColumnType("numeric");
 
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -890,9 +995,6 @@ namespace AliRoyalMarquee.Infrastructure.Migrations
 
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric");
-
-                    b.Property<int?>("ProfitMarginTarget")
-                        .HasColumnType("integer");
 
                     b.Property<string>("Status")
                         .IsRequired()
@@ -1069,6 +1171,9 @@ namespace AliRoyalMarquee.Infrastructure.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("character varying(500)");
 
+                    b.Property<int>("ItemType")
+                        .HasColumnType("integer");
+
                     b.Property<decimal>("LineTotal")
                         .HasPrecision(18, 2)
                         .HasColumnType("numeric(18,2)");
@@ -1217,6 +1322,14 @@ namespace AliRoyalMarquee.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
+
+                    b.Property<string>("CNIC")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("CompensationType")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -1604,6 +1717,36 @@ namespace AliRoyalMarquee.Infrastructure.Migrations
                     b.Navigation("Event");
                 });
 
+            modelBuilder.Entity("AliRoyalMarquee.Domain.Entities.InventoryMovement", b =>
+                {
+                    b.HasOne("AliRoyalMarquee.Domain.Entities.InventoryItem", "InventoryItem")
+                        .WithMany("Movements")
+                        .HasForeignKey("InventoryItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("InventoryItem");
+                });
+
+            modelBuilder.Entity("AliRoyalMarquee.Domain.Entities.InventoryReservation", b =>
+                {
+                    b.HasOne("AliRoyalMarquee.Domain.Entities.Event", "Event")
+                        .WithMany()
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AliRoyalMarquee.Domain.Entities.InventoryItem", "InventoryItem")
+                        .WithMany("Reservations")
+                        .HasForeignKey("InventoryItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Event");
+
+                    b.Navigation("InventoryItem");
+                });
+
             modelBuilder.Entity("AliRoyalMarquee.Domain.Entities.Payment", b =>
                 {
                     b.HasOne("AliRoyalMarquee.Domain.Entities.Booking", "Booking")
@@ -1721,6 +1864,13 @@ namespace AliRoyalMarquee.Infrastructure.Migrations
                     b.Navigation("Staff");
 
                     b.Navigation("Tasks");
+                });
+
+            modelBuilder.Entity("AliRoyalMarquee.Domain.Entities.InventoryItem", b =>
+                {
+                    b.Navigation("Movements");
+
+                    b.Navigation("Reservations");
                 });
 
             modelBuilder.Entity("AliRoyalMarquee.Domain.Entities.Permission", b =>

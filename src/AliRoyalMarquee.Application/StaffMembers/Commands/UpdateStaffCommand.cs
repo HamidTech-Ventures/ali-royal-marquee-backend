@@ -15,6 +15,8 @@ namespace AliRoyalMarquee.Application.StaffMembers.Commands
         public string Shift { get; set; }
         public string Status { get; set; }
         public decimal? Salary { get; set; }
+        public string CNIC { get; set; }
+        public string CompensationType { get; set; }
     }
 
     public class UpdateStaffCommandHandler : IRequestHandler<UpdateStaffCommand>
@@ -41,6 +43,8 @@ namespace AliRoyalMarquee.Application.StaffMembers.Commands
             entity.Shift = request.Shift;
             entity.Status = request.Status;
             entity.Salary = request.Salary;
+            entity.CNIC = request.CNIC;
+            entity.CompensationType = request.CompensationType;
 
             await _context.SaveChangesAsync(cancellationToken);
         }

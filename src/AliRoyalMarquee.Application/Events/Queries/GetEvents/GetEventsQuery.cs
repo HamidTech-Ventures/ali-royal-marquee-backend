@@ -23,6 +23,14 @@ public class EventDto
     public string EndTime { get; set; } = default!;
     public string? Hall { get; set; }
     public int Guests { get; set; }
+    public List<EventStaffDto> Staff { get; set; } = new();
+}
+
+public class EventStaffDto
+{
+    public Guid? StaffId { get; set; }
+    public string Name { get; set; }
+    public string Role { get; set; }
 }
 
 public record GetEventsQuery : IRequest<List<EventDto>>;
@@ -41,6 +49,7 @@ public class GetEventsQueryHandler : IRequestHandler<GetEventsQuery, List<EventD
         var events = await _context.Events
             .Include(e => e.Booking)
             .ThenInclude(b => b.Venue)
+            .Include(e => e.Staff)
             .AsNoTracking()
             .OrderBy(e => e.Booking.BookingDate)
             .ToListAsync(cancellationToken);
@@ -58,7 +67,12 @@ public class GetEventsQueryHandler : IRequestHandler<GetEventsQuery, List<EventD
             StartTime = e.Booking.StartTime.ToString("HH:mm"),
             EndTime = e.Booking.EndTime.ToString("HH:mm"),
             Hall = e.Booking.Venue?.Name,
-            Guests = e.Booking.GuestCount
+            Guests = e.Booking.GuestCount,
+            Staff = e.Staff.Select(s => new EventStaffDto {
+                StaffId = s.StaffMemberId,
+                Name = s.Name,
+                Role = s.Role
+            }).ToList()
         }).ToList();
     }
 }

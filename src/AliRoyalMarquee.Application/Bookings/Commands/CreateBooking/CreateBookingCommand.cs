@@ -14,7 +14,9 @@ public record CreateBookingCommand(
     DateTime EndTime,
     int GuestCount,
     decimal TotalAmount,
-    Guid? PackageId = null
+    Guid? PackageId = null,
+    string? EventTitle = null,
+    bool IsDraft = false
 ) : IRequest<Guid>;
 
 public class CreateBookingValidator : AbstractValidator<CreateBookingCommand>
@@ -51,10 +53,24 @@ public class CreateBookingCommandHandler : IRequestHandler<CreateBookingCommand,
             throw new InvalidOperationException("The venue is already booked for the specified time range.");
 
         var currentMonth = DateTime.UtcNow.ToString("yyyyMM");
-        var bookingCount = await _context.Bookings
-            .CountAsync(b => b.ReferenceNumber.StartsWith($"BKG-{currentMonth}-"), cancellationToken);
+        var prefix = $"BKG-{currentMonth}-";
         
-        var referenceNumber = $"BKG-{currentMonth}-{(bookingCount + 1).ToString("D4")}";
+        var lastBooking = await _context.Bookings
+            .Where(b => b.ReferenceNumber.StartsWith(prefix))
+            .OrderByDescending(b => b.ReferenceNumber)
+            .FirstOrDefaultAsync(cancellationToken);
+            
+        int nextNumber = 1;
+        if (lastBooking != null)
+        {
+            var lastNumberStr = lastBooking.ReferenceNumber.Replace(prefix, "");
+            if (int.TryParse(lastNumberStr, out int lastNumber))
+            {
+                nextNumber = lastNumber + 1;
+            }
+        }
+        
+        var referenceNumber = $"{prefix}{nextNumber.ToString("D4")}";
 
         var booking = new Booking(
             request.CustomerId,
@@ -68,8 +84,20 @@ public class CreateBookingCommandHandler : IRequestHandler<CreateBookingCommand,
             request.PackageId
         );
 
+        if (request.IsDraft) 
+        {
+            booking.MarkAsDraft();
+        }
+
         _context.Bookings.Add(booking);
         
+        if (!string.IsNullOrWhiteSpace(request.EventTitle))
+        {
+            var eventRef = referenceNumber.Replace("BKG-", "EVT-");
+            var newEvent = new Event(booking.Id, eventRef, request.EventTitle, null);
+            _context.Events.Add(newEvent);
+        }
+
         await _context.SaveChangesAsync(cancellationToken);
 
         return booking.Id;

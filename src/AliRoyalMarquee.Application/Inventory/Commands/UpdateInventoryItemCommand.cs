@@ -15,6 +15,7 @@ namespace AliRoyalMarquee.Application.Inventory.Commands
         public decimal Quantity { get; set; }
         public decimal MinQuantity { get; set; }
         public string Unit { get; set; }
+        public string ItemType { get; set; }
     }
 
     public class UpdateInventoryItemCommandHandler : IRequestHandler<UpdateInventoryItemCommand>
@@ -40,6 +41,7 @@ namespace AliRoyalMarquee.Application.Inventory.Commands
             entity.Quantity = request.Quantity;
             entity.MinQuantity = request.MinQuantity;
             entity.Unit = request.Unit;
+            entity.ItemType = request.ItemType;
 
             await _context.SaveChangesAsync(cancellationToken);
         }

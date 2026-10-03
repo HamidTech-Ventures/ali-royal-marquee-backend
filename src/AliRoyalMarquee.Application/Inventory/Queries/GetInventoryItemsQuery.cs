@@ -6,6 +6,7 @@ using AliRoyalMarquee.Application.Common.Interfaces;
 using AliRoyalMarquee.Application.Inventory.DTOs;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace AliRoyalMarquee.Application.Inventory.Queries
 {
@@ -33,7 +34,10 @@ namespace AliRoyalMarquee.Application.Inventory.Queries
                     Category = x.Category,
                     Quantity = x.Quantity,
                     MinQuantity = x.MinQuantity,
-                    Unit = x.Unit
+                    Unit = x.Unit,
+                    UnitPrice = x.UnitPrice,
+                    Location = x.Location,
+                    ItemType = string.IsNullOrEmpty(x.ItemType) ? "Fixed Asset" : x.ItemType
                 })
                 .ToListAsync(cancellationToken);
         }

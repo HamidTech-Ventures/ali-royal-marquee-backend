@@ -18,7 +18,9 @@ public class EnquiryQuotationConfiguration : IEntityTypeConfiguration<EnquiryQuo
         builder.Property(x => x.Subtotal).HasPrecision(18, 2);
         builder.Property(x => x.DiscountAmount).HasPrecision(18, 2);
         builder.Property(x => x.ServiceChargeAmount).HasPrecision(18, 2);
-        builder.Property(x => x.TaxAmount).HasPrecision(18, 2);
+        builder.Property(x => x.PRATaxAmount).HasPrecision(18, 2);
+        builder.Property(x => x.TokenMoney).HasPrecision(18, 2);
+        builder.Property(x => x.AdvancePayment).HasPrecision(18, 2);
         builder.Property(x => x.GrandTotal).HasPrecision(18, 2);
 
         builder.Property(x => x.Notes)
