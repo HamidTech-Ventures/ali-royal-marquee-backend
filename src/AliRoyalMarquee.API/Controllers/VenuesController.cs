@@ -24,4 +24,19 @@ public class VenuesController : ControllerBase
         var result = await _mediator.Send(new GetVenuesQuery());
         return Ok(result);
     }
+
+    [HttpPost]
+    public async Task<ActionResult<Guid>> CreateVenue(AliRoyalMarquee.Application.Venues.Commands.CreateVenueCommand command)
+    {
+        return await _mediator.Send(command);
+    }
+
+    [HttpPut("{id}")]
+    public async Task<ActionResult> UpdateVenue(Guid id, AliRoyalMarquee.Application.Venues.Commands.UpdateVenueCommand command)
+    {
+        if (id != command.Id) return BadRequest();
+        await _mediator.Send(command);
+        return NoContent();
+    }
+
 }

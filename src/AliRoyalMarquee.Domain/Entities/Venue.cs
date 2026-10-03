@@ -20,6 +20,13 @@ public class Venue : BaseEntity
         IsActive = true;
     }
     
+    
+    public void UpdateDetails(string name, int capacity, string? description)
+    {
+        Name = name;
+        Capacity = capacity;
+        Description = description;
+    }
     public void UpdateStatus(bool isActive)
     {
         IsActive = isActive;
