@@ -63,7 +63,7 @@ public class GetEventsQueryHandler : IRequestHandler<GetEventsQuery, List<EventD
             ManagerId = e.ManagerId ?? "Unassigned",
             Status = e.Status,
             ReadinessScore = e.ReadinessScore,
-            DateStr = e.Booking.BookingDate.ToString("MMM dd, yyyy"),
+            DateStr = e.Booking.BookingDate.ToString("MMM dd, yyyy", System.Globalization.CultureInfo.InvariantCulture),
             StartTime = e.Booking.StartTime.ToString("HH:mm"),
             EndTime = e.Booking.EndTime.ToString("HH:mm"),
             Hall = e.Booking.Venue?.Name,

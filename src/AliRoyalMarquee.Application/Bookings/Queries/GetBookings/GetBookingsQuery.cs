@@ -98,7 +98,7 @@ public class GetBookingsQueryHandler : IRequestHandler<GetBookingsQuery, GetBook
                 EventTitle = b.Event != null ? b.Event.Title : null,
                 VenueId = b.VenueId,
                 Hall = b.Venue.Name,
-                DateStr = b.BookingDate.ToString("MMM dd, yyyy"),
+                DateStr = b.BookingDate.ToString("MMM dd, yyyy", System.Globalization.CultureInfo.InvariantCulture),
                 Shift = b.StartTime.Hour < 17 ? "Day" : "Night",
                 Guests = b.GuestCount,
                 TotalAmount = b.TotalAmount,

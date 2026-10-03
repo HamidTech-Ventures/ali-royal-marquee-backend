@@ -10,7 +10,17 @@ using System.Threading.Tasks;
 
 namespace AliRoyalMarquee.Application.Customers.Queries.GetCustomers;
 
-public record CustomerDto(Guid Id, string Name, string Phone, string? Email, string Tier, decimal TotalSpent);
+public record CustomerDto(
+    Guid Id, 
+    string Name, 
+    string Phone, 
+    string? Email, 
+    string Tier, 
+    decimal TotalSpent,
+    DateTimeOffset CreatedAt,
+    int BookingsCount,
+    decimal OutstandingBalance
+);
 
 public record GetCustomersQuery() : IRequest<List<CustomerDto>>;
 
@@ -37,7 +47,10 @@ public class GetCustomersQueryHandler : IRequestHandler<GetCustomersQuery, List<
             c.Phone,
             c.Email,
             c.Tier.ToString(),
-            c.Bookings.SelectMany(b => b.Payments).Sum(p => p.Amount)
+            c.Bookings.Where(b => b.Status != BookingStatus.Cancelled).SelectMany(b => b.Payments).Sum(p => p.Amount),
+            c.CreatedAt,
+            c.Bookings.Count,
+            c.Bookings.Where(b => b.Status != BookingStatus.Cancelled).Sum(b => b.TotalAmount) - c.Bookings.Where(b => b.Status != BookingStatus.Cancelled).SelectMany(b => b.Payments).Sum(p => p.Amount)
         )).ToList();
     }
 }

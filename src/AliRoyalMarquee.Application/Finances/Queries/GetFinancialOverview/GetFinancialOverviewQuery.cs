@@ -69,7 +69,7 @@ public class GetFinancialOverviewQueryHandler : IRequestHandler<GetFinancialOver
             var monthProfit = monthRevenue - monthExpenses;
             
             monthlyData.Add(new MonthlyDataDto(
-                targetMonth.ToString("MMM"),
+                targetMonth.ToString("MMM", System.Globalization.CultureInfo.InvariantCulture),
                 monthRevenue,
                 monthExpenses,
                 monthProfit

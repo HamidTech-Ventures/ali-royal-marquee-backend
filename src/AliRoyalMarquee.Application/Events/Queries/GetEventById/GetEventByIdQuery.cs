@@ -96,7 +96,7 @@ public class GetEventByIdQueryHandler : IRequestHandler<GetEventByIdQuery, Event
             Status = e.Status,
             ReadinessScore = e.ReadinessScore,
             StaffRequired = e.StaffRequired,
-            DateStr = e.Booking.BookingDate.ToString("MMM dd, yyyy"),
+            DateStr = e.Booking.BookingDate.ToString("MMM dd, yyyy", System.Globalization.CultureInfo.InvariantCulture),
             StartTime = e.Booking.StartTime.ToString("HH:mm"),
             EndTime = e.Booking.EndTime.ToString("HH:mm"),
             Hall = e.Booking.Venue?.Name,

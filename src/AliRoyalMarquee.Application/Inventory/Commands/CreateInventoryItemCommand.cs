@@ -35,7 +35,9 @@ namespace AliRoyalMarquee.Application.Inventory.Commands
                 Quantity = request.Quantity,
                 MinQuantity = request.MinQuantity,
                 Unit = request.Unit,
-                ItemType = request.ItemType
+                ItemType = request.ItemType,
+                Location = "Main Store",
+                UnitPrice = 0
             };
 
             _context.InventoryItems.Add(entity);

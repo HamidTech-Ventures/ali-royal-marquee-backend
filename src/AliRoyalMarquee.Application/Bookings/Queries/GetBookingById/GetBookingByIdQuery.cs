@@ -48,7 +48,7 @@ public class GetBookingByIdQueryHandler : IRequestHandler<GetBookingByIdQuery, B
             EventTitle = booking.Event?.Title,
             VenueId = booking.VenueId,
             Hall = booking.Venue.Name,
-            DateStr = booking.BookingDate.ToString("MMM dd, yyyy"),
+            DateStr = booking.BookingDate.ToString("MMM dd, yyyy", System.Globalization.CultureInfo.InvariantCulture),
             Shift = booking.StartTime.Hour < 17 ? "Day" : "Night",
             Guests = booking.GuestCount,
             TotalAmount = booking.TotalAmount,
@@ -63,7 +63,7 @@ public class GetBookingByIdQueryHandler : IRequestHandler<GetBookingByIdQuery, B
                 Amount = p.Amount,
                 Method = p.Method.ToString(),
                 Status = p.Status.ToString(),
-                DateStr = p.PaymentDate.ToString("MMM dd, yyyy HH:mm"),
+                DateStr = p.PaymentDate.ToString("MMM dd, yyyy HH:mm", System.Globalization.CultureInfo.InvariantCulture),
                 Reference = p.ReferenceNumber
             }).ToList()
         };
