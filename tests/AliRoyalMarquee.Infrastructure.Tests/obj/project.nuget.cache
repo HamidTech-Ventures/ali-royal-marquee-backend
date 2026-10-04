@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "1NsxlAbvTbQ=",
+  "dgSpecHash": "TIND0MbtZD8=",
   "success": true,
   "projectFilePath": "C:\\My working\\HamidTech_Ventures\\Clients\\marquee-management-system\\backend\\tests\\AliRoyalMarquee.Infrastructure.Tests\\AliRoyalMarquee.Infrastructure.Tests.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\HAMID\\.nuget\\packages\\cloudinarydotnet\\1.29.3\\cloudinarydotnet.1.29.3.nupkg.sha512",
     "C:\\Users\\HAMID\\.nuget\\packages\\coverlet.collector\\6.0.4\\coverlet.collector.6.0.4.nupkg.sha512",
     "C:\\Users\\HAMID\\.nuget\\packages\\fluentvalidation\\11.11.0\\fluentvalidation.11.11.0.nupkg.sha512",
     "C:\\Users\\HAMID\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.11.0\\fluentvalidation.dependencyinjectionextensions.11.11.0.nupkg.sha512",

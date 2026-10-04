@@ -2,6 +2,22 @@
   "version": 3,
   "targets": {
     "net10.0": {
+      "CloudinaryDotNet/1.29.3": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3"
+        },
+        "compile": {
+          "lib/netstandard2.0/CloudinaryDotNet.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/CloudinaryDotNet.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "coverlet.collector/6.0.4": {
         "type": "package",
         "build": {
@@ -935,6 +951,7 @@
           "AliRoyalMarquee.Application": "1.0.0",
           "AliRoyalMarquee.Domain": "1.0.0",
           "AliRoyalMarquee.Shared": "1.0.0",
+          "CloudinaryDotNet": "1.29.3",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.3",
           "QuestPDF": "2026.8.0",
           "System.IdentityModel.Tokens.Jwt": "8.22.0"
@@ -962,6 +979,25 @@
     }
   },
   "libraries": {
+    "CloudinaryDotNet/1.29.3": {
+      "sha512": "C9UpTh7YoOrfeUXcdjnsEloTaWKTNeDgvMpWoGAOTkC6HOxPIbcQAiSGhoqPPT8scAKAFjrPzf89nyZkGvtoCg==",
+      "type": "package",
+      "path": "cloudinarydotnet/1.29.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "CloudinaryIcon.png",
+        "README.md",
+        "cloudinarydotnet.1.29.3.nupkg.sha512",
+        "cloudinarydotnet.nuspec",
+        "lib/net452/CloudinaryDotNet.dll",
+        "lib/net452/CloudinaryDotNet.xml",
+        "lib/netstandard1.3/CloudinaryDotNet.dll",
+        "lib/netstandard1.3/CloudinaryDotNet.xml",
+        "lib/netstandard2.0/CloudinaryDotNet.dll",
+        "lib/netstandard2.0/CloudinaryDotNet.xml"
+      ]
+    },
     "coverlet.collector/6.0.4": {
       "sha512": "lkhqpF8Pu2Y7IiN7OntbsTtdbpR1syMsm2F3IgX6ootA4ffRqWL5jF7XipHuZQTdVuWG/gVAAcf8mjk8Tz0xPg==",
       "type": "package",

@@ -47,6 +47,14 @@ public class BookingsController : ControllerBase
         return NoContent();
     }
 
+    [HttpPut("{id:guid}/package")]
+    public async Task<IActionResult> UpdatePackage(Guid id, [FromBody] AliRoyalMarquee.Application.Bookings.Commands.UpdateBooking.UpdateBookingPackageCommand command)
+    {
+        if (id != command.BookingId) return BadRequest("ID mismatch");
+        await _mediator.Send(command);
+        return NoContent();
+    }
+
     [HttpPut("{id:guid}/status")]
     public async Task<IActionResult> UpdateStatus(Guid id, [FromBody] AliRoyalMarquee.Application.Bookings.Commands.UpdateBookingStatus.UpdateBookingStatusCommand command)
     {

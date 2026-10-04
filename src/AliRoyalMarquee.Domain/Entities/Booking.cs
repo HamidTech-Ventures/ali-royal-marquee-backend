@@ -90,6 +90,16 @@ public class Booking : BaseEntity
         TotalAmount = totalAmount;
     }
 
+    public void UpdatePackage(Guid? packageId)
+    {
+        PackageId = packageId;
+    }
+
+    public void SetTotalAmount(decimal amount)
+    {
+        TotalAmount = amount;
+    }
+
     public void AddPayment(Payment payment)
     {
         _payments.Add(payment);

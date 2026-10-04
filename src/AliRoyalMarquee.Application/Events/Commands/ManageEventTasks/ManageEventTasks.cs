@@ -48,3 +48,39 @@ public class UpdateEventTaskCommandHandler : IRequestHandler<UpdateEventTaskComm
         await _context.SaveChangesAsync(cancellationToken);
     }
 }
+
+public record EditEventTaskCommand(Guid TaskId, string Title, string? Assignee, string? DueTime) : IRequest;
+
+public class EditEventTaskCommandHandler : IRequestHandler<EditEventTaskCommand>
+{
+    private readonly IAppDbContext _context;
+    public EditEventTaskCommandHandler(IAppDbContext context) => _context = context;
+
+    public async Task Handle(EditEventTaskCommand request, CancellationToken cancellationToken)
+    {
+        var task = await _context.EventTasks.FirstOrDefaultAsync(x => x.Id == request.TaskId, cancellationToken);
+        if (task == null) throw new Exception("Task not found");
+
+        task.UpdateDetails(request.Title, request.Assignee, request.DueTime);
+
+        await _context.SaveChangesAsync(cancellationToken);
+    }
+}
+
+public record DeleteEventTaskCommand(Guid TaskId) : IRequest;
+
+public class DeleteEventTaskCommandHandler : IRequestHandler<DeleteEventTaskCommand>
+{
+    private readonly IAppDbContext _context;
+    public DeleteEventTaskCommandHandler(IAppDbContext context) => _context = context;
+
+    public async Task Handle(DeleteEventTaskCommand request, CancellationToken cancellationToken)
+    {
+        var task = await _context.EventTasks.FirstOrDefaultAsync(x => x.Id == request.TaskId, cancellationToken);
+        if (task == null) throw new Exception("Task not found");
+
+        _context.EventTasks.Remove(task);
+
+        await _context.SaveChangesAsync(cancellationToken);
+    }
+}

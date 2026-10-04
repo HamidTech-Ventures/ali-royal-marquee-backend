@@ -69,3 +69,40 @@ public class UpdateBookingCommandHandler : IRequestHandler<UpdateBookingCommand>
         await _context.SaveChangesAsync(cancellationToken);
     }
 }
+
+public record UpdateBookingPackageCommand(Guid BookingId, Guid? PackageId) : IRequest;
+
+public class UpdateBookingPackageCommandHandler : IRequestHandler<UpdateBookingPackageCommand>
+{
+    private readonly IAppDbContext _context;
+    public UpdateBookingPackageCommandHandler(IAppDbContext context) => _context = context;
+
+    public async Task Handle(UpdateBookingPackageCommand request, CancellationToken cancellationToken)
+    {
+        var booking = await _context.Bookings.FindAsync(new object[] { request.BookingId }, cancellationToken);
+        if (booking == null) throw new Exception("Booking not found");
+
+        booking.UpdatePackage(request.PackageId);
+
+        decimal packagePrice = 0;
+
+        if (request.PackageId.HasValue)
+        {
+            var package = await _context.Packages.FindAsync(new object[] { request.PackageId.Value }, cancellationToken);
+            if (package != null)
+            {
+                if (!string.IsNullOrEmpty(package.Type) && package.Type.Contains("Fixed", StringComparison.OrdinalIgnoreCase))
+                {
+                    packagePrice = package.Price;
+                }
+                else
+                {
+                    packagePrice = package.Price * booking.GuestCount;
+                }
+            }
+        }
+
+        booking.SetTotalAmount(packagePrice);
+        await _context.SaveChangesAsync(cancellationToken);
+    }
+}

@@ -31,4 +31,11 @@ public class EventTask : BaseEntity
         Status = status;
         Progress = progress;
     }
+
+    public void UpdateDetails(string title, string? assignee, string? dueTime)
+    {
+        Title = title;
+        Assignee = assignee;
+        DueTime = dueTime;
+    }
 }

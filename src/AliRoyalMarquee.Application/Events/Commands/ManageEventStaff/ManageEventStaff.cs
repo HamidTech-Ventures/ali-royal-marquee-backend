@@ -24,7 +24,7 @@ public class AddEventStaffCommandHandler : IRequestHandler<AddEventStaffCommand,
     }
 }
 
-public record RemoveEventStaffCommand(Guid EventId, Guid StaffMemberId) : IRequest<bool>;
+public record RemoveEventStaffCommand(Guid EventId, Guid StaffId) : IRequest<bool>;
 
 public class RemoveEventStaffCommandHandler : IRequestHandler<RemoveEventStaffCommand, bool>
 {
@@ -33,10 +33,10 @@ public class RemoveEventStaffCommandHandler : IRequestHandler<RemoveEventStaffCo
 
     public async Task<bool> Handle(RemoveEventStaffCommand request, CancellationToken cancellationToken)
     {
-        var staffList = await _context.EventStaff.Where(s => s.EventId == request.EventId && s.StaffMemberId == request.StaffMemberId).ToListAsync(cancellationToken);
-        if (!staffList.Any()) return false;
+        var staff = await _context.EventStaff.FirstOrDefaultAsync(s => s.EventId == request.EventId && s.Id == request.StaffId, cancellationToken);
+        if (staff == null) return false;
         
-        _context.EventStaff.RemoveRange(staffList);
+        _context.EventStaff.Remove(staff);
         await _context.SaveChangesAsync(cancellationToken);
         return true;
     }

@@ -71,6 +71,21 @@ public class EventsController : ControllerBase
         return NoContent();
     }
 
+    [HttpPut("{id:guid}/tasks/{taskId:guid}/details")]
+    public async Task<IActionResult> EditTask(Guid id, Guid taskId, [FromBody] EditEventTaskCommand command)
+    {
+        if (taskId != command.TaskId) return BadRequest();
+        await _mediator.Send(command);
+        return NoContent();
+    }
+
+    [HttpDelete("{id:guid}/tasks/{taskId:guid}")]
+    public async Task<IActionResult> DeleteTask(Guid id, Guid taskId)
+    {
+        await _mediator.Send(new DeleteEventTaskCommand(taskId));
+        return NoContent();
+    }
+
     [HttpPost("{id:guid}/staff")]
     public async Task<IActionResult> AddStaff(Guid id, [FromBody] AddEventStaffCommand command)
     {
@@ -79,10 +94,10 @@ public class EventsController : ControllerBase
         return Ok(new { staffId });
     }
 
-    [HttpDelete("{id:guid}/staff/{staffMemberId:guid}")]
-    public async Task<IActionResult> RemoveStaff(Guid id, Guid staffMemberId)
+    [HttpDelete("{id:guid}/staff/{staffId:guid}")]
+    public async Task<IActionResult> RemoveStaff(Guid id, Guid staffId)
     {
-        var result = await _mediator.Send(new RemoveEventStaffCommand(id, staffMemberId));
+        var result = await _mediator.Send(new RemoveEventStaffCommand(id, staffId));
         return Ok(new { success = result });
     }
 
