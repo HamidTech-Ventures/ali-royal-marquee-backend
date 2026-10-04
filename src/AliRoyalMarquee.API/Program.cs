@@ -53,6 +53,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(connectionString));
 builder.Services.AddScoped<IAppDbContext>(provider => provider.GetRequiredService<AppDbContext>());
 builder.Services.AddScoped<AliRoyalMarquee.Application.Common.Interfaces.ITokenService, AliRoyalMarquee.Infrastructure.Services.TokenService>();
+builder.Services.AddScoped<AliRoyalMarquee.Application.Common.Interfaces.ICloudinaryService, AliRoyalMarquee.Infrastructure.Services.CloudinaryService>();
 builder.Services.AddScoped<AliRoyalMarquee.Application.Enquiries.Interfaces.IQuotationPdfGenerator, AliRoyalMarquee.Infrastructure.Pdf.QuotationPdfGenerator>();
 builder.Services.AddScoped<AliRoyalMarquee.Application.Enquiries.Interfaces.IEnquiriesReportPdfGenerator, AliRoyalMarquee.Infrastructure.Pdf.EnquiriesReportPdfGenerator>();
 

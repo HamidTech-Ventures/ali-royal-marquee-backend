@@ -76,4 +76,11 @@ public class BookingsController : ControllerBase
         await _mediator.Send(new AliRoyalMarquee.Application.Bookings.Commands.DeleteBooking.DeleteBookingCommand(id));
         return NoContent();
     }
+
+    [HttpGet("{id:guid}/invoice")]
+    public async Task<IActionResult> GenerateInvoice(Guid id)
+    {
+        var url = await _mediator.Send(new AliRoyalMarquee.Application.Bookings.Commands.GenerateInvoice.GenerateInvoiceCommand { BookingId = id });
+        return Ok(new { url });
+    }
 }

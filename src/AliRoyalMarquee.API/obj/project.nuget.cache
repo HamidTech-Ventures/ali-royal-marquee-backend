@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "ZQsgt3IvS70=",
+  "dgSpecHash": "Te+WWvAJsBU=",
   "success": true,
   "projectFilePath": "C:\\My working\\HamidTech_Ventures\\Clients\\marquee-management-system\\backend\\src\\AliRoyalMarquee.API\\AliRoyalMarquee.API.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\HAMID\\.nuget\\packages\\cloudinarydotnet\\1.29.3\\cloudinarydotnet.1.29.3.nupkg.sha512",
     "C:\\Users\\HAMID\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
     "C:\\Users\\HAMID\\.nuget\\packages\\dapper.aot\\1.0.48\\dapper.aot.1.0.48.nupkg.sha512",
     "C:\\Users\\HAMID\\.nuget\\packages\\fluentvalidation\\11.11.0\\fluentvalidation.11.11.0.nupkg.sha512",
@@ -43,7 +44,7 @@
     "C:\\Users\\HAMID\\.nuget\\packages\\microsoft.identitymodel.tokens\\8.22.0\\microsoft.identitymodel.tokens.8.22.0.nupkg.sha512",
     "C:\\Users\\HAMID\\.nuget\\packages\\microsoft.openapi\\2.0.0\\microsoft.openapi.2.0.0.nupkg.sha512",
     "C:\\Users\\HAMID\\.nuget\\packages\\mono.texttemplating\\3.0.0\\mono.texttemplating.3.0.0.nupkg.sha512",
-    "C:\\Users\\HAMID\\.nuget\\packages\\newtonsoft.json\\11.0.1\\newtonsoft.json.11.0.1.nupkg.sha512",
+    "C:\\Users\\HAMID\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\HAMID\\.nuget\\packages\\npgsql\\9.0.2\\npgsql.9.0.2.nupkg.sha512",
     "C:\\Users\\HAMID\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\9.0.3\\npgsql.entityframeworkcore.postgresql.9.0.3.nupkg.sha512",
     "C:\\Users\\HAMID\\.nuget\\packages\\pipelines.sockets.unofficial\\2.2.8\\pipelines.sockets.unofficial.2.2.8.nupkg.sha512",
@@ -67,18 +68,6 @@
       "warningLevel": 1,
       "filePath": "C:\\My working\\HamidTech_Ventures\\Clients\\marquee-management-system\\backend\\src\\AliRoyalMarquee.API\\AliRoyalMarquee.API.csproj",
       "libraryId": "Microsoft.OpenApi",
-      "targetGraphs": [
-        "net10.0"
-      ]
-    },
-    {
-      "code": "NU1903",
-      "level": "Warning",
-      "message": "Package 'Newtonsoft.Json' 11.0.1 has a known high severity vulnerability, https://github.com/advisories/GHSA-5crp-9r3c-p9vr",
-      "projectPath": "C:\\My working\\HamidTech_Ventures\\Clients\\marquee-management-system\\backend\\src\\AliRoyalMarquee.API\\AliRoyalMarquee.API.csproj",
-      "warningLevel": 1,
-      "filePath": "C:\\My working\\HamidTech_Ventures\\Clients\\marquee-management-system\\backend\\src\\AliRoyalMarquee.API\\AliRoyalMarquee.API.csproj",
-      "libraryId": "Newtonsoft.Json",
       "targetGraphs": [
         "net10.0"
       ]

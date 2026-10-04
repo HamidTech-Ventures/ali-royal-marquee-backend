@@ -22,10 +22,15 @@ public class EventDetailsDto
     public string DateStr { get; set; } = default!;
     public string StartTime { get; set; } = default!;
     public string EndTime { get; set; } = default!;
+    public string? SpecialRequirements { get; set; }
     
     public string? Hall { get; set; }
     public int Guests { get; set; }
     public string? CustomerName { get; set; }
+    public string? PackageName { get; set; }
+    public string? PackageInclusionsJson { get; set; }
+    public decimal? PackagePrice { get; set; }
+    public string? PackageType { get; set; }
     public string? CustomerPhone { get; set; }
     public decimal TotalAmount { get; set; }
 
@@ -78,6 +83,8 @@ public class GetEventByIdQueryHandler : IRequestHandler<GetEventByIdQuery, Event
                 .ThenInclude(b => b.Venue)
             .Include(e => e.Booking)
                 .ThenInclude(b => b.Customer)
+            .Include(e => e.Booking)
+                .ThenInclude(b => b.Package)
             .Include(e => e.Tasks)
             .Include(e => e.Staff)
             .Include(e => e.MenuItems)
@@ -101,7 +108,12 @@ public class GetEventByIdQueryHandler : IRequestHandler<GetEventByIdQuery, Event
             EndTime = e.Booking.EndTime.ToString("HH:mm"),
             Hall = e.Booking.Venue?.Name,
             Guests = e.Booking.GuestCount,
+            SpecialRequirements = "",
             CustomerName = e.Booking.Customer?.Name,
+            PackageName = e.Booking.Package?.Name,
+            PackageInclusionsJson = e.Booking.Package?.InclusionsJson,
+            PackagePrice = e.Booking.Package?.Price,
+            PackageType = e.Booking.Package?.Type,
             CustomerPhone = e.Booking.Customer?.Phone,
             TotalAmount = e.Booking.TotalAmount,
             Tasks = e.Tasks.Select(t => new EventTaskDto
