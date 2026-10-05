@@ -167,57 +167,47 @@ namespace AliRoyalMarquee.Infrastructure.Pdf
             {
                 table.ColumnsDefinition(columns =>
                 {
-                    columns.RelativeColumn(4);
-                    columns.RelativeColumn(1);
-                    columns.RelativeColumn(1.5f);
-                    columns.RelativeColumn(1.5f);
+                    columns.RelativeColumn(3);
+                    columns.RelativeColumn(2);
+                    columns.RelativeColumn(2);
+                    columns.RelativeColumn(2);
                 });
 
                 table.Header(header =>
                 {
-                    header.Cell().Background(MainColor).Padding(8).Text("DESCRIPTION & INCLUSIONS").FontColor(Colors.White).FontSize(9).Bold();
-                    header.Cell().Background(MainColor).Padding(8).Text("TYPE").FontColor(Colors.White).FontSize(9).Bold();
-                    header.Cell().Background(MainColor).Padding(8).AlignRight().Text("RATE (PKR)").FontColor(Colors.White).FontSize(9).Bold();
-                    header.Cell().Background(MainColor).Padding(8).AlignRight().Text("TOTAL (PKR)").FontColor(Colors.White).FontSize(9).Bold();
+                    header.Cell().Background(MainColor).Padding(8).Text("DESCRIPTION").FontColor(Colors.White).FontSize(9).Bold();
+                    header.Cell().Background(MainColor).Padding(8).Text("METHOD/STATUS").FontColor(Colors.White).FontSize(9).Bold();
+                    header.Cell().Background(MainColor).Padding(8).Text("DATE/REF").FontColor(Colors.White).FontSize(9).Bold();
+                    header.Cell().Background(MainColor).Padding(8).AlignRight().Text("AMOUNT (PKR)").FontColor(Colors.White).FontSize(9).Bold();
                 });
 
-                // Row 1 (Dynamic Package/Event Charges)
+                // Row 1 (Booking Total)
                 table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten3).Padding(8).Column(c => {
-                    c.Item().Text("Event Booking Charges").Bold();
-                    c.Item().Text("Standard event booking package including venue hire and standard inclusions.").FontColor(GrayText).FontSize(9);
+                    c.Item().Text("Total Event Booking Charges").Bold();
+                    c.Item().Text($"Includes venue ({_booking.Hall}) and requested packages for {_booking.Guests} guests.").FontColor(GrayText).FontSize(9);
                 });
-                table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten3).Padding(8).Text("Fixed");
-                table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten3).Padding(8).AlignRight().Column(c => {
-                    c.Item().AlignRight().Text(_booking.TotalAmount.ToString("N0"));
-                });
+                table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten3).Padding(8).Text("-");
+                table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten3).Padding(8).Text("-");
                 table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten3).Padding(8).AlignRight().Text(_booking.TotalAmount.ToString("N0")).Bold();
 
-                // Row 2
-                table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten3).Padding(8).Column(c => {
-                    c.Item().Text("Premium Floral Stage Decor").Bold();
-                    c.Item().Text("Custom white floral theme with VIP seating area (40 guests).").FontColor(GrayText).FontSize(9);
-                });
-                table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten3).Padding(8).Text("Fixed");
-                table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten3).Padding(8).AlignRight().Text("120,000");
-                table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten3).Padding(8).AlignRight().Text("120,000").Bold();
-                
-                // Row 3
-                table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten3).Padding(8).Column(c => {
-                    c.Item().Text("Heating / Cooling Surcharge").Bold();
-                    c.Item().Text("Chiller/AC facility and generator diesel backup for Evening Shift.").FontColor(GrayText).FontSize(9);
-                });
-                table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten3).Padding(8).Text("Fixed");
-                table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten3).Padding(8).AlignRight().Text("45,000");
-                table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten3).Padding(8).AlignRight().Text("45,000").Bold();
-                
-                // Row 4
-                table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten3).Padding(8).Column(c => {
-                    c.Item().Text("Valet Parking Service").Bold();
-                    c.Item().Text("Dedicated valet team for Crystal Pavilion guests.").FontColor(GrayText).FontSize(9);
-                });
-                table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten3).Padding(8).Text("Fixed");
-                table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten3).Padding(8).AlignRight().Text("15,000");
-                table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten3).Padding(8).AlignRight().Text("15,000").Bold();
+                // List Real Payments
+                foreach (var payment in _booking.Payments)
+                {
+                    table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten3).Padding(8).Column(c => {
+                        c.Item().Text("Payment Received").Bold().FontColor(Colors.Green.Darken2);
+                    });
+                    table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten3).Padding(8).Column(c => {
+                        c.Item().Text(payment.Method);
+                        c.Item().Text(payment.Status).FontSize(8).FontColor(GrayText);
+                    });
+                    table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten3).Padding(8).Column(c => {
+                        c.Item().Text(payment.DateStr).FontSize(9);
+                        if (!string.IsNullOrEmpty(payment.Reference)) {
+                            c.Item().Text($"Ref: {payment.Reference}").FontSize(8).FontColor(GrayText);
+                        }
+                    });
+                    table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten3).Padding(8).AlignRight().Text($"-{payment.Amount:N0}").Bold().FontColor(Colors.Green.Darken2);
+                }
             });
         }
 
